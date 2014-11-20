@@ -1,0 +1,65 @@
+The Agora system is composed of three components on the outer layer.
+
+0010) Registrar
+
+- At first, this will probably be one central server, which can be queried to return a list
+  of all registered agoras and their properties.  Eventually, multiple registrars could exist
+  in theory, if someone was so inclined as to host their own and add it to the config file.
+
+0020) Servers
+
+- These are the actual Agoras themselves.  Upon creation, they list themselves on the Registrar,
+  along with their details including address, name, port, number of users connected out of the
+  total capacity, and the type of security used for logging in.
+
+0030) Clients
+
+- Whoever wishes to populate an Agora will need a client object in order to do so.  The Client
+  simply communicates with the Server, which may then choose to communicate with the Client.
+
+
+--------------------------------------------------
+
+ANATOMY
+
+
+0010) Registrar
+
+ - Perhaps the most simple and straightforward.  This socket can be queried to return a list of servers.
+
+
+0020) Server
+
+ - This will be the most complicated of the three outer layer components.
+
+ 0021) Creation
+
+  - After the package is loaded, a function must be called to create an Agora.
+      CL-USER> (agora:@new :name "test" :address #(72 197 245 1) :port 9678 :security 'SIMPLE)
+      <AGORA-SERVER NIL {10042E7103}>
+      CL-USER>
+  - This should create an as-yet-dormant Agora object featuring a stream and details to-be-used-later.
+
+ 0022) Testing
+
+  - Let's come back to this.
+
+ 0023) Registering
+
+  - The Agora needs to be listed on the registrar probably.
+      CL-USER> (agora:@local)
+      (<AGORA-SERVER NIL {10042E7103}>)
+      CL-USER> (agora:@register (car *))
+      Attempting connection with primary registrar at #(192 232 210 163)...
+      Connection successful...Attempting to register Agora for listing...
+      Finished.
+      You may now call on the registrar list and/or connect to your own Agora.
+
+ 0024) Pushing Agora Server Property Changes while keeping Agora Server alive
+
+  - Come the f'ck back to this as well, right!?
+
+
+0030) Client
+
+  - Will list more here after beginning work. OK!
